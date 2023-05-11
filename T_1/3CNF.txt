@@ -1,0 +1,46 @@
+a) In cel mai rau caz putem avea o expresie (x1 ∨ x2 ∨ x3) ∧ (x4 ∨ x5 ∨ x3) ∧ ... ∧ (x(n-1) ∨ xn ∨ x3)
+   In acest caz solutia optima este 1 (il facem decat pe x3 true)
+   Dar in cazul algoritmului nostru se poate ca niciodata acesta sa nu aleage pe x3, si intotdeauna sa aleaga una dintre celelalte 2 variabile
+din cadrul predicatului. In acest caz algoritmul nostru va select pentru fiecare dintre cele n/2 clauze cate o variabile si o va face true,
+deci rezultatul returnat de acesta va fi n/2 => in acest caz (care este cel mai rau caz posibil) ALG = n/2 OPT => factorul de aproximare worst
+case este n/2.
+
+b) Cât timp C ≠ ∅ execută:
+   (a) Alegem aleator Cj ∈ C.
+   (b) Pentru toate cele 3 xi din Cj  - modificarea
+        (c) xi ← true
+        (d) Eliminăm din C toate predicatele care îl conțin pe xi
+
+Justificare:
+La fiecare pas se vor alege 3 variabile. Fiecare clauza aleasa nu contine la momentul alegerii nici o variabila true, intrucat altfel
+nu ar fi aleasa. Fie S multime variabilelor necesare, astfel incat OPT = card (S) (S reprezinta multimea variabilelor care trebuie facute true
+astfel incat numarul variabilelor sa fie minim).
+In fiecare clauza se afla cel putin o variabila din S. Demonstratie pentru aceasta afirmatie:
+   Pp ca nu exista nicio variabila x in C ai x inclus in S => nu exista nicio variabila x in C ai x = true => C = false => expresia noastra
+= false => inseamna ca nu e solutie.
+Deci, la fiecare pas vom face true 3 variabile, dintre care cel putin 1 se afla in S => ALG <= 3 * OPT => algortimul e 3 aproximativ.
+
+c) Fie C = { C1, ... , Cm } mulțimea de predicate, X = { x1, ... , xn } mulțimea de variabile.
+   Fie Y = {y1, ..., yn}, unde yi ∈ [0, 1] și reprezintă valoarea variabilei xi, astfel încât yi = 1 dacă variabila xi este adevărată și 
+yi = 0 altfel.
+   Fie Z = {z1, ..., zm}, unde zi ∈ [0, 1] și reprezintă valoarea clauzei Ci, astfel încât zi = 1 dacă clauza Ci este adevărată și zi = 0 
+altfel.
+   Trebuie sa minimizam functia: Sum(1<=i<=n)(yi)
+   Constrangeri: 
+     yi + yj + yk ≥ 1 pentru orice clauză Cj care conține variabilele xi, xj și xk.
+     zj ≥ yi pentru orice variabilă xi care apare în clauza Cj
+     yi ∈ [0, 1], pentru orice variabilă xi.
+     zj ∈ [0, 1], pentru orice clauză Cj.
+
+d) Creem o matrice M astfel. Pentru fiecare clauza creem o linie, prima coloana din aceasta linie reprezinta zi corespunzator clauzei respective,
+iar urmatoarele 3 coloane reprezinta yi, yj, yk corespunzatoare variabilelor din clauza respectiva. Rezolvam problema in modul urmator:
+   1. Inițializăm toate variabilele cu valoarea 0: y1 = y2 = ... = yn = 0.
+   2.Pentru fiecare clauză Cj care conține variabilele xi, xj și xk, calculăm valoarea zj astfel: zj = 1 dacă cel puțin una dintre 
+variabilele xi, xj și xk este adevărată (adică yi = 1 sau yj = 1 sau yk = 1), altfel zj = 0.
+   3. Aplicăm următoarea iterație până când toate clauzele devin adevarate (adica M[c][0] = 1 pentru orice c in (1, m)): Pentru orice linie unde
+M[c][0] = 0 facem M[c][0] = M[c][1] = M[c][2] = M[c][3] = 1, iar apoi facem M[c'][0] = 1 pentru orice linie c' unde M[c'][0] = 0 si cel putin 
+una dintre variabilele corespunzatoare yi', yj', yk' corespund variabilelor yi, yj, yk corespunzatoare liniei c.
+   4. In final M[c][0] = 1 pentru orice c in (1, m), adica toate clauzele sunt satisfacute.
+
+Problema este 3-aproximativa, intrucat foloseste algoritmul de la subpunctul b.
+     

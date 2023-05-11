@@ -1,0 +1,10 @@
+a) Factorul de aproximare al algoritmului propus este posibil sa fie corect. Aceasta se datorează faptului că dacă timpul de lucru al 
+activităților este cel mult 100, atunci variația timpilor de procesare este relativ mare, ceea ce face ca diferenta dintre timpii de 
+procesare a celor 2 masini (in cazul optim) sa poate fi una mare (de cel mult 100), asta insemnand ca rezultatul obtinut (80 pe o masina 
+si 120 pe alta) ar putea fi unul aproape de cel optim, deci 1.1 aproximativ putand fi corect.
+
+b) Dacă timpul de lucru al activităților este cel mult 10, atunci factorul de aproximare al algoritmului propus probabil este incorect.
+Acest lucru se datorează faptului că variația timpilor de procesare este mică, ceea ce face ca diferența între timpul de procesare
+total al celor 2 masini (in cazul optim) sa fie una mica (de cel mult 10). Asta inseamna ca in cazul nostru, unde avem o diferenta de 40 
+intre cele 2 masini, solutia obtinuta este cel mai probabil una departe de cea optima, deci este destul de improbabil ca factorul 
+de 1.1 aproximare sa fie corect.

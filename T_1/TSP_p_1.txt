@@ -1,0 +1,20 @@
+a) Avand graful nostru G=(V,E) unde toate muchiile sale au ponderea 1 sau 2, construim graful G' pe baza lui G:
+      V(G’)=V(G); | V(G’)|=n;​
+      Pentru fiecare e ∈ E(G’) pentru care e ∈ E(G) avem w(e, G’) = 1. ( ponderea muchiei e în G’ va fi 1)​
+      Pentru fiecare e ∈ E(G’)  pentru care e ∉ E(G) avem w(e, G’) = 2
+   Daca G contine un ciclu hamiltonian, atunci TSP(G') = n, altfel TSP(G') > n, intrucat acest drum va contine cel putin o muchie care nu se 
+afla in G, deci care are costul 2.
+   Astfel, pe baza TSP, putem afla raspunsul in cazul problemei HC (daca TSP(G') = n => exista ciclu hamiltonian, altfel nu exista), deci
+putem reduce problema HC la TSP in cazul nostru (1)
+   HC este o problema NP-complete (2).
+   Din (1) si (2) => TSP in cazul nostru (unde muchiile au ponderea 1 sau 2) este NP-hard.
+                      
+
+b) Asa cum reies din algoritmul explicat la curs, ciclul nostru contine atat muchii/lanturi din MST - parcurse o singura data care insumate
+<= MST, dar si muchii care nu sunt in MST, care insumate <= MST => ALG = muchii din MST + muchii din afara MST <= MST + MST = 2*MST <= 2*OPT.
+   Dar, in cazul muchiilor care sunt in afara MST, aceste muchii pot fi vazute ca formand unul sau mai multe cicluri in graf. Deoarece 
+graful respecta inegalitatea triunghiului, costul oricarui ciclu trebuie sa fie mai mare sau egal cu costul oricarui triunghi format din 
+muchiile ciclului (daca sa zicem avem intr-un triunghi muchiil xy, yz si zx din inegalitatea triunghiului => xy + yz >= zx => xy + yz + zx >=
+2*zx => (suma celor 3 laturi)/2 >= zx, adica orice latura dintr-un triunghi e mai mica decat jumatatea sumei tuturor laturilor). 
+Din aceasta cauza, costul total al muchiilor din afara MST (muchii folosite in ciclul nostru si nu sunt in MST) nu poate depasi jumatate din 
+costul total al muchiilor din MST. Deci ALG = muchii din MST + muchii din afara MST <= MST + 1/2MST = 3/2*MST <= 3/2*OPT
